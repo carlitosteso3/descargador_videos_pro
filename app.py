@@ -10,7 +10,11 @@ from flask import Flask, render_template, request, send_from_directory
 
 # --- Configuración de Flask ---
 # Le decimos a Flask que los templates están en la carpeta actual ('.')
-app = Flask(__name__, template_folder='.')
+# Obtiene la ruta absoluta del directorio donde se encuentra app.py
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+# Le dice a Flask que la carpeta de plantillas está en ese mismo directorio
+app = Flask(__name__, template_folder=basedir)
 
 # --- Carga del Modelo Whisper ---
 print("Cargando el modelo de Whisper...")
