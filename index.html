@@ -1,5 +1,4 @@
-<!-- templates/index.html (versión 3.1 - Sintaxis Corregida) -->
-
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -43,7 +42,6 @@
             <button type="submit">Iniciar Proceso</button>
         </form>
 
-        <!-- Bloque para mostrar errores -->
         {% if error_message %}
         <div class="results-box error-box">
             <h3>Ocurrió un Error:</h3>
@@ -51,17 +49,19 @@
         </div>
         {% endif %}
 
-        <!-- Bloque para mostrar la transcripción -->
         {% if transcripcion %}
         <div class="results-box success-box">
             <h3>Transcripción Generada:</h3>
             <textarea readonly>{{ transcripcion }}</textarea>
-            
-            <!-- Bloque ANIDADO para mostrar el botón de descarga del video -->
-            {% if download_link %}
-            <a href="{{ download_link }}" class="download-button">Descargar Video</a>
-            {% endif %}
-            
+        </div>
+        {% endif %}
+
+        {% if download_link %}
+        <div class="results-box success-box">
+            <h3>Video Listo para Descargar:</h3>
+            <a href="{{ download_link }}" class="download-button">
+                Descargar "{{ video_title|truncate(40) }}"
+            </a>
         </div>
         {% endif %}
 
