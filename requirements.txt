@@ -1,0 +1,7 @@
+Flask
+yt-dlp
+openai-whisper
+# PyTorch se instala como dependencia de whisper, pero es bueno especificarlo
+# Nota: Render podría necesitar la versión específica de CPU
+torch
+torchaudio
