@@ -1,0 +1,70 @@
+<!-- templates/index.html (versión 3.1 - Sintaxis Corregida) -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargador de Videos</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #f4f4f9; color: #333; }
+        .container { background: white; margin: 40px auto; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 700px; }
+        h1 { color: #0056b3; text-align: center; }
+        form label { display: block; margin-bottom: 8px; font-weight: 600; }
+        form input[type="text"], form select { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
+        form button { width: 100%; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
+        form button:hover { background-color: #0056b3; }
+        
+        .results-box { margin-top: 30px; padding: 20px; border-radius: 8px; }
+        .error-box { background: #f8d7da; border-left: 5px solid #dc3545; color: #721c24; }
+        .success-box { background: #e2e3e5; border-left: 5px solid #007bff; }
+        .success-box h3 { margin-top: 0; color: #004085; }
+
+        textarea { width: 100%; height: 200px; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-family: 'Courier New', Courier, monospace; }
+        .download-button { display: inline-block; text-decoration: none; background-color: #28a745; color: white; padding: 12px 20px; border-radius: 6px; font-weight: bold; margin-top: 15px; }
+        .download-button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Descargador y Transcriptor Pro</h1>
+
+        <form action="/" method="post">
+            <label for="video_url">URL del Video:</label>
+            <input type="text" id="video_url" name="video_url" placeholder="Pega la URL aquí..." required>
+
+            <label for="opcion">Elige una acción:</label>
+            <select id="opcion" name="opcion">
+                <option value="solo_transcripcion">Mostrar Transcripción</option>
+                <option value="ambos">Mostrar Transcripción y Descargar Video</option>
+                <option value="solo_video">Descargar Solo Video</option>
+            </select>
+
+            <button type="submit">Iniciar Proceso</button>
+        </form>
+
+        <!-- Bloque para mostrar errores -->
+        {% if error_message %}
+        <div class="results-box error-box">
+            <h3>Ocurrió un Error:</h3>
+            <p>{{ error_message }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Bloque para mostrar la transcripción -->
+        {% if transcripcion %}
+        <div class="results-box success-box">
+            <h3>Transcripción Generada:</h3>
+            <textarea readonly>{{ transcripcion }}</textarea>
+            
+            <!-- Bloque ANIDADO para mostrar el botón de descarga del video -->
+            {% if download_link %}
+            <a href="{{ download_link }}" class="download-button">Descargar Video</a>
+            {% endif %}
+            
+        </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>
