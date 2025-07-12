@@ -23,4 +23,4 @@ EXPOSE 10000
 
 # El comando para iniciar la aplicación cuando el contenedor arranque
 # Usamos gunicorn, un servidor WSGI de producción que es mejor que el de desarrollo de Flask
-CMD ["gunicorn", "--workers", "1", "--threads", "2", "--timeout", "300", "-b", "0.0.0.0:10000", "app:app"]
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:10000", "--timeout", "300"]
